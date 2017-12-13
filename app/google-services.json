@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "570204323715",
+    "firebase_url": "https://gameofpong-ef9a5.firebaseio.com",
+    "project_id": "gameofpong-ef9a5",
+    "storage_bucket": "gameofpong-ef9a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570204323715:android:846ecf8624579e58",
+        "android_client_info": {
+          "package_name": "com.android.paritosh.gameofpong"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570204323715-fn2vlmmf5lpsd8vm6nt5unh2grr8uff2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.paritosh.gameofpong",
+            "certificate_hash": "37dec4af41fc22645b65ddc8969cf17e86a2425b"
+          }
+        },
+        {
+          "client_id": "570204323715-vefgdd8a9tdbuhh530m6v86uvqu4kp9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt4u5E6h9RZxZI9uiBofZx7CWHmapTxjk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570204323715-vefgdd8a9tdbuhh530m6v86uvqu4kp9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

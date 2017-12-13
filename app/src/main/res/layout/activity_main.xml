@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:gravity="center"
+    tools:context="com.android.paritosh.gameofpong.SplashActivity" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:onClick="game"
+        android:background="@drawable/selectorplay"
+        android:textColor="#fff"
+        android:textSize="45sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.20"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:gravity="center"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="40dp"
+                android:onClick="info"
+                android:background="@drawable/selector_exit"
+                android:textColor="#fff"
+                android:textSize="33sp" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:onClick="info"
+                android:background="@drawable/selector_info"
+                android:textColor="#fff"
+                android:textSize="33sp" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="80dp"
+                android:onClick="options"
+                android:background="@drawable/options"
+
+                android:textColor="#fff"
+                android:textSize="33sp" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.30"/>
+    </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    </LinearLayout>
