@@ -1,18 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_options"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#000"
+    android:orientation="horizontal"
     tools:context="com.android.paritosh.gameofpong.OptionsActivity">
-    <TextView
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        android:background="@drawable/selector_exit"
+        android:onClick="ext" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="this is option activity"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Difficulty"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/selector"
+                    android:onClick="decrement"
+                    android:text="-"
+                    android:textColor="#fff"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="i"
+                    android:textColor="#fff"
+                    android:textSize="30sp" />
+
+                <Button
+                    android:id="@+id/dec"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/selector"
+                    android:onClick="increment"
+                    android:text="+"
+                    android:textColor="#fff"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="165dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vibration"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/vSwitchView"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector"
+                android:gravity="center"
+                android:onClick="vibSwitch"
+                android:text="s"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="165dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Audio"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/audio"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector"
+                android:gravity="center"
+                android:onClick="audioSwitch"
+                android:text="s"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

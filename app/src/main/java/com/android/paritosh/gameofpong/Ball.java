@@ -15,6 +15,7 @@ public class Ball {
     private float mBallWidth;
     private float mBallHeight;
 
+
     public Ball(int screenX, int screenY) {
         // Make the mBall size relative to the screen resolution
         //changed from 100 to 80
@@ -67,9 +68,22 @@ public class Ball {
     create a function flag type to adjust the speed
     to do that got to work with increaseVelocity()
      */
-    public void increaseVelocity(){
-        mXVelocity = mXVelocity + mXVelocity / 100;
-        mYVelocity = mYVelocity + mYVelocity / 110;
+    public void increaseVelocity(int lv) {
+        if (lv == 1) {
+            mXVelocity = mXVelocity + mXVelocity / 100;
+            mYVelocity = mYVelocity + mYVelocity / 110;
+        }
+        if (lv == 2) {
+            mXVelocity = mXVelocity + mXVelocity / 90;
+            mYVelocity = mYVelocity + mYVelocity / 100;
+        }
+        if (lv == 3) {
+            mXVelocity = mXVelocity + mXVelocity / 10;
+            mYVelocity = mYVelocity + mYVelocity / 10;
+        } else {
+            mXVelocity = mXVelocity + mXVelocity / 100;
+            mYVelocity = mYVelocity + mYVelocity / 110;
+        }
     }
 
     public void clearObstacleY(float y){

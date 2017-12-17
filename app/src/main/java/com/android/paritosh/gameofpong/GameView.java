@@ -1,6 +1,9 @@
 package com.android.paritosh.gameofpong;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -15,12 +18,16 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import java.io.IOException;
+
+import static com.android.paritosh.gameofpong.R.id.scoreDisplay;
 
 /**
  * Created by PARITOSH on 9/25/2017.
@@ -54,14 +61,24 @@ import java.io.IOException;
         Ball mBall;
         // For sound FX
         SoundPool sp;
-        int beep1ID = -1;
-        int beep2ID = -1;
-        int beep3ID = -1;
+
         int loseLifeID = -1;
+    int explodeID = -1;
         // The mScore
         int mScore = 0;
         // Lives
         int mLives = 3;
+
+
+    Vibrator vibe;
+
+    SharedPreferences setting = this.getContext().getSharedPreferences("LEVEL_DATA", Context.MODE_PRIVATE);
+    SharedPreferences vibration = this.getContext().getSharedPreferences("VIBRATION_DATA", Context.MODE_PRIVATE);
+    SharedPreferences audio = this.getContext().getSharedPreferences("AUDIO_DATA", Context.MODE_PRIVATE);
+
+    int lv = setting.getInt("LEVEL", 0);
+    boolean v = vibration.getBoolean("Vibrate", true);
+    boolean a = audio.getBoolean("aud", true);
     /*
     When we call new() on gameView
     This custom constructor runs
@@ -83,6 +100,7 @@ import java.io.IOException;
         mPaddle1 = new Paddle(mScreenX, mScreenY);
         // Create a mBall
         mBall = new Ball(mScreenX, mScreenY);
+        vibe = (Vibrator) this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
  /*
  Instantiate our sound pool
  dependent upon which version
@@ -95,28 +113,22 @@ import java.io.IOException;
                             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                             .build();
             sp = new SoundPool.Builder()
-                    .setMaxStreams(5)
+                    .setMaxStreams(2)
                     .setAudioAttributes(audioAttributes)
                     .build();
 
         } else {
-            sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+            sp = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         }
         try{
             // Create objects of the 2 required classes
             AssetManager assetManager = context.getAssets();
             AssetFileDescriptor descriptor;
             // Load our fx in memory ready for use
-            descriptor = assetManager.openFd("beep1.ogg");
-            beep1ID = sp.load(descriptor, 0);
-            descriptor = assetManager.openFd("beep2.ogg");
-            beep2ID = sp.load(descriptor, 0);
-            descriptor = assetManager.openFd("beep3.ogg");
-            beep3ID = sp.load(descriptor, 0);
             descriptor = assetManager.openFd("loseLife.ogg");
             loseLifeID = sp.load(descriptor, 0);
             descriptor = assetManager.openFd("explode.ogg");
-            //explodeID = sp.load(descriptor, 0);
+            explodeID = sp.load(descriptor, 0);
         }catch(IOException e){
             // Print an error message to the console
             Log.e("error", "failed to load sound files");
@@ -130,10 +142,44 @@ import java.io.IOException;
         mPaddle1.resetPaddle(mScreenX,mScreenY);
         // if game over reset scores and mLives
         if(mLives == 0) {
+
+            //GameActivity g = new GameActivity();
+            //g.start(mScore);
+
+            //vibe.vibrate(200);
             mScore = 0;
             mLives = 3;
+
         }
     }
+
+    public void gameOver(Context c) {
+
+        if (mLives == 0) {
+
+            //GameActivity g = new GameActivity();
+            //g.start(mScore);
+
+
+            Intent i = new Intent(c, ScoreActivity.class);
+            i.putExtra("score", mScore);
+            c.startActivity(i);
+            ((Activity) (c)).finish();
+            //getActivity().finish();
+
+
+            mScore = 0;
+            mLives = 3;
+
+        }
+    }
+
+    public void vibrationSetter(int length) {
+        if (v == true) {
+            vibe.vibrate(length);
+        }
+    }
+
 
     @Override
     public void run() {
@@ -172,8 +218,11 @@ import java.io.IOException;
             mBall.reverseYVelocity();
             mBall.clearObstacleY(mPaddle1.getRect().top - 2);
             mScore++;
-            mBall.increaseVelocity();
-            sp.play(beep1ID, 1, 1, 0, 0, 1);
+            mBall.increaseVelocity(lv);
+            if (a == true) {
+                sp.play(loseLifeID, 1, 1, 0, 0, 1);
+            }
+            vibrationSetter(30);
         }
         // Bounce the mBall back when it hits the bottom of screen
         if(mBall.getRect().bottom > mScreenY){
@@ -182,12 +231,16 @@ import java.io.IOException;
             // Lose a life
             mLives--;
 
-            mBall.increaseVelocity();
+            mBall.increaseVelocity(lv);
 
-            sp.play(loseLifeID, 1, 1, 0, 0, 1);
+            if (a == true) {
+                sp.play(explodeID, 1, 1, 0, 0, 1);
+            }
+            vibrationSetter(100);
             if(mLives == 0){
-                mPaused = true;
-                setupAndRestart();
+                //mPaused = true;
+                gameOver(getContext());
+
             }
         }
         // Bounce the mBall back when it hits the top of screen
@@ -197,7 +250,11 @@ import java.io.IOException;
             //mBall.increaseVelocity();
 
             mBall.clearObstacleYtop(30);
-            sp.play(beep2ID, 1, 1, 0, 0, 1);
+            if (a == true) {
+                sp.play(loseLifeID, 1, 1, 0, 0, 1);
+            }
+
+            vibrationSetter(30);
         }
         // If the mBall hits left wall bounce
         if(mBall.getRect().left < 0){
@@ -206,13 +263,19 @@ import java.io.IOException;
             //mBall.increaseVelocity();
 
             mBall.clearObstacleX(2);
-            sp.play(beep3ID, 1, 1, 0, 0, 1);
+            if (a == true) {
+                sp.play(loseLifeID, 1, 1, 0, 0, 1);
+            }
+            vibrationSetter(30);
         }
         // If the mBall hits right wall bounce
         if(mBall.getRect().right > mScreenX){
             mBall.reverseXVelocity();
             mBall.clearObstacleX(mScreenX - 22);
-            sp.play(beep3ID, 1, 1, 0, 0, 1);
+            if (a == true) {
+                sp.play(loseLifeID, 1, 1, 0, 0, 1);
+            }
+            vibrationSetter(30);
         }
     }
 

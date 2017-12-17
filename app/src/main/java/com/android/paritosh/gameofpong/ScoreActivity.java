@@ -4,58 +4,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class ScoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        FullScreencall();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_score);
 
+        TextView scoreL = (TextView) findViewById(R.id.scoreLabel);
+        TextView highSL = (TextView) findViewById(R.id.highScoreLabel);
+        FullScreencall();
+
+        int score = getIntent().getIntExtra("score", 0);
+        scoreL.setText(score + "");
 
         SharedPreferences setting = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
         int hs = setting.getInt("HIGH_SCORE", 0);
 
+        if (score > hs) {
+            highSL.setText("High Score: " + score);
 
-        TextView t = (TextView) findViewById(R.id.scoreDisplay);
-        t.setText("Best Score: " + hs);
+            SharedPreferences.Editor editor = setting.edit();
+            editor.putInt("HIGH_SCORE", score);
+            editor.commit();
+        } else {
+            highSL.setText("High Score: " + hs);
+        }
 
     }
-
-
-    public void game(View view) {
-        Intent i = new Intent(MainActivity.this, GameActivity.class);
-        startActivity(i);
-
-    }
-
-    public void options(View view) {
-        Intent i = new Intent(MainActivity.this, OptionsActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    public void info(View view) {
-        Intent i = new Intent(MainActivity.this, InfoActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    public void exit(View view) {
-        if (Build.VERSION.SDK_INT >= 21)
-            finishAndRemoveTask();
-        else
-            finish();
-        System.exit(0);
-    }
-
 
     public void FullScreencall() {
         if (Build.VERSION.SDK_INT < 19) {
@@ -72,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
+    }
+
+    public void game(View view) {
+        Intent i = new Intent(ScoreActivity.this, GameActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void mainMenu(View view) {
+        Intent i = new Intent(ScoreActivity.this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
 

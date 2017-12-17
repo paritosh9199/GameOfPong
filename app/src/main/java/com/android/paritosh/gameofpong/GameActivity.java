@@ -1,5 +1,6 @@
 package com.android.paritosh.gameofpong;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+
+import static android.R.attr.start;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -55,6 +58,8 @@ public class GameActivity extends AppCompatActivity {
         // Initialize gameView and set it as the view
         //gameView = new GameView(this, size.x, size.y);
         //setContentView(gameView);
+
+
     }
 
     // This method executes when the player starts the game
@@ -88,4 +93,6 @@ public class GameActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
     }
+
+
 }

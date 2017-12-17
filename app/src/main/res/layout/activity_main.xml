@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.android.paritosh.gameofpong.SplashActivity" >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,25 +17,26 @@
 
 
     <TextView
-        android:id="@+id/score"
+        android:id="@+id/scoreDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Best Score : "
-        android:textColor="#fff"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="8dp"
-        android:textSize="17dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:text="Best Score: "
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="15dp" />
     <TextView
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/selectorplay"
         android:gravity="center"
         android:onClick="game"
-        android:background="@drawable/selectorplay"
         android:textColor="#fff"
-        android:textSize="45sp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="45sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,39 +58,38 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-
-                android:gravity="center"
                 android:layout_marginLeft="80dp"
                 android:layout_marginRight="40dp"
-                android:onClick="info"
                 android:background="@drawable/selector_exit"
+                android:gravity="center"
+                android:onClick="exit"
                 android:textColor="#fff"
                 android:textSize="33sp" />
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
 
-                android:gravity="center"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:onClick="info"
                 android:background="@drawable/selector_info"
+                android:gravity="center"
+                android:onClick="info"
                 android:textColor="#fff"
                 android:textSize="33sp" />
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
 
-                android:gravity="center"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="80dp"
-                android:onClick="options"
                 android:background="@drawable/options"
+                android:gravity="center"
+                android:onClick="options"
 
                 android:textColor="#fff"
                 android:textSize="33sp" />

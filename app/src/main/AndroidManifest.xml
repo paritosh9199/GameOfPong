@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.paritosh.gameofpong">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,33 +14,27 @@
             android:name=".SplashActivity"
             android:screenOrientation="sensorLandscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".GameActivity"
-            android:screenOrientation="sensorLandscape">
-
-        </activity>
-        <activity
-            android:name=".Game1Activity"
-            android:screenOrientation="sensorLandscape" />
+            android:screenOrientation="sensorLandscape"></activity>
         <activity
             android:name=".OptionsActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".InfoActivity"
             android:screenOrientation="sensorLandscape" />
+
         <activity
-            android:name=".CreditaActivity"
+            android:name=".ScoreActivity"
             android:screenOrientation="sensorLandscape"></activity>
     </application>
 
